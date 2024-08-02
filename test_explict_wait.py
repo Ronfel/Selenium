@@ -1,6 +1,7 @@
 import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
 
 browser = webdriver.Chrome()
@@ -11,20 +12,7 @@ browser.get("https://www.hyrtutorials.com/p/waits-demo.html#google_vignette")
 
 wait = WebDriverWait(browser, 30)
 
-btn1 = browser.find_element(By.ID, "btn1")
-btn2 = browser.find_element(By.ID, "btn2")
-
-
-btn1.click()
-browser.exp(7)
-
-txt1 = browser.find_element(By.ID, "txt1")
-print(txt1.is_displayed())
-
-btn2.click()
-browser.implicitly_wait(14)
-
-txt2 = browser.find_element(By.ID, "txt2")
-print(txt2.is_displayed())
+btn1 = browser.find_element(By.ID, "btn1").click()
+wait.until(EC.element_to_be_clickable((By.ID, "txt1")))
 
 browser.quit()
